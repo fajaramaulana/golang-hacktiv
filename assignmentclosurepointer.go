@@ -16,11 +16,14 @@ func main() {
 
 	names := []*string{&zayan, &billy, &rizky, &fajar, &zaka, &hendar, &wahyu, &tambunan, &ramadhan, &utomo}
 
-	cetaknih := func(list []*string) {
+	cetaknih := func(list []*string) []string {
+		var result []string
 		for _, name := range list {
-			fmt.Println(*name)
+			result = append(result, *name)
 		}
+
+		return result
 	}
 
-	cetaknih(names)
+	fmt.Println(cetaknih(names))
 }
