@@ -25,5 +25,7 @@ func main() {
 		return result
 	}
 
-	fmt.Println(cetaknih(names))
+	cetaknihye := cetaknih(names)
+
+	fmt.Println(cetaknihye)
 }
