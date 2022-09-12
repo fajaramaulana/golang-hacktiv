@@ -79,10 +79,10 @@ func (u *UserService) DeleteUser(id int) string {
 			fmt.Printf("%# v", u.db[:i])
 			fmt.Printf("%# v", u.db[:i+1])
 			u.db = append(u.db[:i], u.db[i+1:]...)
-			return "user berhasil dihapuss"
+			return "user berhasil dihapus"
 		}
 	}
-	return "user tidak ditemukan"
+	return "user tidak ditemukans"
 }
 
 func (u *UserService) RegisterAPI(c *gin.Context) {
