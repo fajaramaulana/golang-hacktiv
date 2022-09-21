@@ -24,6 +24,7 @@ func NewEmployeeController(employeeService services.EmployeeService) *employeeCo
 func (employeeController *employeeController) EmployeeRoutes(group *gin.RouterGroup) {
 	route := group.Group("/employee")
 	route.POST("/create", employeeController.AddEmployee)
+	route.GET("/getall", employeeController.GetAllEmployee)
 }
 
 func (h *employeeController) AddEmployee(c *gin.Context) {
@@ -46,4 +47,15 @@ func (h *employeeController) AddEmployee(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{"data": newEmployee})
+}
+
+func (h *employeeController) GetAllEmployee(c *gin.Context) {
+	employees, err := h.employeeService.GetAllEmployee()
+
+	if err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(200, gin.H{"data": employees})
 }

@@ -7,6 +7,7 @@ import (
 
 type RepositoryEmployee interface {
 	CreateEmployee(employee entities.Employee) (entities.Employee, error)
+	GetAllEmployee() ([]entities.Employee, error)
 }
 
 type repositories struct {
@@ -39,4 +40,42 @@ func (r *repositories) CreateEmployee(employee entities.Employee) (entities.Empl
 	}
 
 	return newEmployee, nil
+}
+
+func (r *repositories) GetAllEmployee() ([]entities.Employee, error) {
+	var employees []entities.Employee
+	sqlStatement := `SELECT id, full_name, email, age, division FROM employees`
+
+	stmt, err := r.db.Prepare(sqlStatement)
+
+	if err != nil {
+		return employees, err
+	}
+
+	defer stmt.Close()
+
+	rows, err := stmt.Query()
+
+	if err != nil {
+		return employees, err
+	}
+
+	if err != nil {
+		return employees, err
+	}
+
+	defer rows.Close()
+
+	for rows.Next() {
+		var employee entities.Employee
+		err = rows.Scan(&employee.Id, &employee.Full_name, &employee.Email, &employee.Age, &employee.Division)
+
+		if err != nil {
+			return employees, err
+		}
+
+		employees = append(employees, employee)
+	}
+
+	return employees, nil
 }
