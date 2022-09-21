@@ -12,7 +12,7 @@ import (
 
 func Init() {
 	App := gin.Default()
-	db, err := connections.ConnectionDbMysql()
+	db, err := connections.ConnectionDBPgSql()
 
 	if err != nil {
 		log.Fatal(err.Error())
@@ -26,5 +26,5 @@ func Init() {
 
 	employeeController.EmployeeRoutes(v1)
 
-	App.Run(":8080")
+	App.Run(":8081")
 }

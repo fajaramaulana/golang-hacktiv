@@ -21,7 +21,7 @@ func NewRepositoryEmployee(db *sql.DB) RepositoryEmployee {
 
 func (r *repositories) CreateEmployee(employee entities.Employee) (entities.Employee, error) {
 	var newEmployee entities.Employee
-	sqlStatement := `INSERT INTO employee (full_name, email, age, division) VALUES ($1, $2, $3, $4) RETURNING id, fullname, email, age, division`
+	sqlStatement := `INSERT INTO employees (full_name, email, age, division) VALUES ($1, $2, $3, $4) RETURNING id, full_name, email, age, division`
 
 	stmt, err := r.db.Prepare(sqlStatement)
 

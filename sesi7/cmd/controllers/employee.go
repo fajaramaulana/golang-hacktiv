@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"sesi7/cmd/repositories"
 	"sesi7/cmd/request"
 	"sesi7/cmd/services"
@@ -16,15 +17,13 @@ type service struct {
 	repository repositories.RepositoryEmployee
 }
 
-type EmployeeService interface {
-}
-
 func NewEmployeeController(employeeService services.EmployeeService) *employeeController {
-	return &employeeController{}
+	return &employeeController{employeeService}
 }
 
 func (employeeController *employeeController) EmployeeRoutes(group *gin.RouterGroup) {
-	group.POST("/employee", employeeController.AddEmployee)
+	route := group.Group("/employee")
+	route.POST("/create", employeeController.AddEmployee)
 }
 
 func (h *employeeController) AddEmployee(c *gin.Context) {
@@ -36,6 +35,8 @@ func (h *employeeController) AddEmployee(c *gin.Context) {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
+
+	fmt.Printf("%#v \n", input)
 
 	newEmployee, err := h.employeeService.CreateEmployee(input)
 

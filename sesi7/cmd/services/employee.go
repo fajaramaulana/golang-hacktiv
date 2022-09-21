@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	"sesi7/cmd/entities"
 	"sesi7/cmd/repositories"
 	"sesi7/cmd/request"
@@ -19,11 +20,14 @@ func EmployeeNewService(repository repositories.RepositoryEmployee) *services {
 }
 
 func (s *services) CreateEmployee(input request.RegisterEmployee) (entities.Employee, error) {
+	fmt.Printf("%# v", input)
 	employee := entities.Employee{}
 	employee.Full_name = input.Full_name
 	employee.Email = input.Email
 	employee.Age = input.Age
 	employee.Division = input.Division
+
+	fmt.Printf("%#v \n", employee)
 
 	newEmployee, err := s.repository.CreateEmployee(employee)
 
