@@ -12,7 +12,7 @@ import (
 
 func Init() {
 	App := gin.Default()
-	db, err := connections.ConnectionDBPgSql()
+	db, err := connections.ConnectionGormPg()
 
 	if err != nil {
 		log.Fatal(err.Error())

@@ -2,9 +2,12 @@ package controllers
 
 import (
 	"fmt"
+	"net/http"
 	"sesi7/cmd/repositories"
 	"sesi7/cmd/request"
+	"sesi7/cmd/response"
 	"sesi7/cmd/services"
+	"sesi7/configs/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -46,7 +49,12 @@ func (h *employeeController) AddEmployee(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, gin.H{"data": newEmployee})
+	dataResponse := response.FormatUserRegister(newEmployee)
+
+	response := utils.APIResponse("Data Berhasil ditambahkan", http.StatusOK, "Success", dataResponse)
+
+	c.JSON(http.StatusOK, response)
+
 }
 
 func (h *employeeController) GetAllEmployee(c *gin.Context) {
@@ -57,5 +65,7 @@ func (h *employeeController) GetAllEmployee(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, gin.H{"data": employees})
+	response := utils.APIResponse("Data Berhasil Ditemukan", http.StatusOK, "Success", employees)
+
+	c.JSON(http.StatusOK, response)
 }
