@@ -57,6 +57,14 @@ func (h *employeeController) AddEmployee(c *gin.Context) {
 
 }
 
+// GetEmployee godoc
+// @Summary Get all employee
+// @Description Get all employee
+// @Tags Employee
+// @Accept  json
+// @Produce  json
+// @Success 200 {object} Employee
+// @Router /employee/getall [get]
 func (h *employeeController) GetAllEmployee(c *gin.Context) {
 	employees, err := h.employeeService.GetAllEmployee()
 

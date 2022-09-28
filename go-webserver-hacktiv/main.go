@@ -16,7 +16,7 @@ func main() {
 	router.GET("/getuser", userServices.GetUserAPI)
 	router.GET("/getuser/:id", userServices.GetUserAPI)
 	router.PUT("/updateuser/:id", userServices.UpdateUserAPI)
-	router.DELETE("/deleteuser/:id", userServices.DeleteUserAPI)
+	router.DELETE("/deleteuserr/:id", userServices.DeleteUserAPI)
 
 	// http.HandleFunc("/register", userServices.RegisterAPI)
 	// http.HandleFunc("/getalluser", userServices.GetUserAPI)
