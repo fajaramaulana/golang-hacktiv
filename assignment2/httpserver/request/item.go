@@ -3,16 +3,16 @@ package request
 import "assignment2/httpserver/repositories/models"
 
 type CreateItemRequest struct {
-	ItemCode    string `json:"itemcode"`
-	Description string `json:"description"`
-	Quantity    int    `json:"quantity"`
+	ItemCode    string `json:"itemcode" example:"A001"`
+	Description string `json:"description" example:"Baju"`
+	Quantity    int    `json:"quantity" example:"1"`
 }
 
 type UpdateItemRequest struct {
-	ItemId      int    `json:"itemId"`
-	ItemCode    string `json:"itemCode"`
-	Description string `json:"description"`
-	Quantity    int    `json:"quantity"`
+	ItemId      int    `json:"itemId" example:"1"`
+	ItemCode    string `json:"itemCode" example:"A001"`
+	Description string `json:"description" example:"Baju"`
+	Quantity    int    `json:"quantity" example:"1"`
 }
 
 func (req *CreateItemRequest) ToModel(orderId int) (*models.Item, error) {
