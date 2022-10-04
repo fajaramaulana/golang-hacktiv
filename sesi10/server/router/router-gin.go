@@ -17,7 +17,7 @@ func NewRouterGin(user *controllers.UserController) *Router {
 
 func (r *Router) StartGin(port string) {
 	router := gin.Default()
-	router.GET("/gin/users", server.MiddlewareGin, r.user.GetUserGin)
+	router.GET("/gin/users", server.CheckAuth, server.AdminRole, r.user.GetUserGin)
 	router.POST("/gin/users", r.user.RegisterUser)
 	router.POST("/gin/users/login", r.user.Login)
 	router.Run(port)

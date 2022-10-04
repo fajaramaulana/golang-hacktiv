@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+	"sesi10/server/helper"
 	"sesi10/server/models"
 
 	"github.com/gin-gonic/gin"
@@ -76,9 +77,18 @@ func (u *UserController) Login(ctx *gin.Context) {
 		return
 	}
 
+	token, err := helper.GenerateToken(user.Email, user.Role)
+
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "login success",
-		"payload": user,
+		"payload": token,
 	})
 }
 
